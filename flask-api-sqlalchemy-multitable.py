@@ -46,7 +46,6 @@ class PostsResource(Resource):
         with app.test_request_context():
             return posts_schema.dump(Post.query.all())
 
-
     def post(self):  # insert a new post
         data = request.json  # Receive data in JSON format
         post = Post(title=data['title'], content=data['content'])
@@ -82,30 +81,10 @@ api.add_resource(PostsResource, '/posts')
 
 if __name__ == '__main__':
     db.create_all()
-
-    # initial = [
-    #     {
-    #         "title": "E o vento levou",
-    #         "content": "filme antigo",
-    #         "topics": [
-    #             "romance",
-    #             "amor",
-    #         ]
-    #
-    #     },
-    #     {
-    #         "title": "Gladiador",
-    #         "content": "filme de guerra medieval",
-    #         "topics": [
-    #             "guerra",
-    #             "luta",
-    #             "batalha",
-    #         ]
-    #     }
-    # ]
-    post1 = Post(title="Terminator IV", content="Movie that talks about the future John Connor")
-    topic1 = Topic(description="Sci-fi", addtopost=post1)
-    topic2 = Topic(description="War", addtopost=post1)
-    db.session.add_all([post1, topic1, topic2])
-    db.session.commit()
+    # Insert Manually a Record
+    # post1 = Post(title="Terminator IV", content="Movie that talks about the future John Connor")
+    # topic1 = Topic(description="Sci-fi", addtopost=post1)
+    # topic2 = Topic(description="War", addtopost=post1)
+    # db.session.add_all([post1, topic1, topic2])
+    # db.session.commit()
     app.run(port=8001, debug=True)
